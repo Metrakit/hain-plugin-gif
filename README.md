@@ -16,6 +16,10 @@ Type this command in the Hain input :
 /gif cat
 ```
 
+## Todo
+
+- Add a button in the results for put the URL in the clipboard.
+
 ### Credit
 
 Thanks to [Giphy](http://giphy.com/)
