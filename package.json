@@ -1,0 +1,31 @@
+{
+  "name": "hain-plugin-gif",
+  "version": "0.0.1",
+  "description": "hain plugin to search a Gif on giphy.com",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/metrakit/hain-plugin-gif.git"
+  },
+  "author": "Jordane JOUFFROY",
+  "license": "MIT",
+  "keywords": [
+    "hain0"
+  ],
+  "bugs": {
+    "url": "https://github.com/metrakit/hain-plugin-gif/issues"
+  },
+  "homepage": "https://github.com/metrakit/hain-plugin-gif",
+  "dependencies": {
+    "co": "^4.6.0",
+    "got": "^6.2.0",
+    "lodash": "^4.6.1"
+  },
+  "hain": {
+    "prefix": "/gif",
+    "usage": "/gif an awesome gif",
+    "icon": "/logo.png",
+    "redirect": "/gif "
+  }
+}
