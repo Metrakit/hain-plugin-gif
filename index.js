@@ -43,7 +43,7 @@ module.exports = (context) => {
     if (query_enc) {
       let results = yield* queryYoutube(query_trim);
       results = _.reject(results, (x) => x === query_trim);
-      results = _.take(results, 5).map((x) => {
+      results = _.take(results, 10).map((x) => {
         return {
           id: x['images']['original']['url'],
           payload: 'open',
@@ -68,7 +68,7 @@ module.exports = (context) => {
     if (payload !== 'open')
       return;
     if (payload === 'goto') {
-      return shell.openExternal(id);
+      return shell.openExternal(id['images']['original']['url']);
     }
     ncp.copy(id, function() {
         context.toast.enqueue('Pasted to clipboard !');
