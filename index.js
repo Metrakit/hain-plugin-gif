@@ -43,7 +43,7 @@ module.exports = (context) => {
     if (query_enc) {
       let results = yield* queryYoutube(query_trim);
       results = _.reject(results, (x) => x === query_trim);
-      results = _.take(results, 10).map((x) => {
+      results = _.take(results, 20).map((x) => {
         return {
           id: x['images']['original']['url'],
           payload: 'open',
