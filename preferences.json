@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "queryLimit": {
+      "type": "number",
+      "title": "Limit query to",
+      "default": 25
+    }
+  }
+}
