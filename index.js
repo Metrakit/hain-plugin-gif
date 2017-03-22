@@ -12,9 +12,9 @@ const DESC = 'Search a Gif';
 const query_url = 'http://api.giphy.com/v1/gifs/search?q=';
 const api_key = '&api_key=dc6zaTOxFJmzC';
 
-function* queryYoutube(query) {
+function* queryGiphy(query, limit) {
   const query_enc = encodeURIComponent(query);
-  const url = query_url + query_enc + api_key;
+  const url = query_url + query_enc + api_key + `&limit=${limit}`;
   let result = (yield got(url)).body;
 
   result = JSON.parse(result);
@@ -25,12 +25,15 @@ function* queryYoutube(query) {
 }
 
 module.exports = (context) => {
+  const preferences = context.preferences;
+  let queryLimit = preferences.get().queryLimit;
   const shell = context.shell;
 
   let html = 'sdqsdsqsd';
 
   function startup() {
     html = fs.readFileSync(path.join(__dirname, 'preview.html'), 'utf8');
+    preferences.on('update', pref => { queryLimit = pref.queryLimit; });
   }
 
   function* search(query, res) {
@@ -41,9 +44,9 @@ module.exports = (context) => {
     const query_enc = encodeURIComponent(query);
 
     if (query_enc) {
-      let results = yield* queryYoutube(query_trim);
+      let results = yield* queryGiphy(query_trim, queryLimit);
       results = _.reject(results, (x) => x === query_trim);
-      results = _.take(results, 20).map((x) => {
+      results = results.map((x) => {
         return {
           id: x['images']['original']['url'],
           payload: 'open',
@@ -81,5 +84,5 @@ module.exports = (context) => {
     render(preview);
   }
 
-  return { startup, search: co.wrap(search), execute,renderPreview };
+  return { startup, search: co.wrap(search), execute, renderPreview };
 };
